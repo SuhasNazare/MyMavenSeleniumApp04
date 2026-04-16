@@ -17,14 +17,17 @@ public class App {
     public static void main(String[] args) throws InterruptedException {
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized"); // optional
+        
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--start-maximized"); 
 
         WebDriver driver = new ChromeDriver(options);
 
         driver.manage().window().setSize(new org.openqa.selenium.Dimension(1920, 1080));
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
         Actions actions = new Actions(driver);
 
         driver.get("https://www.saucedemo.com/");
@@ -36,7 +39,6 @@ public class App {
         System.out.println("SauceDemo login successful");
 
         driver.switchTo().newWindow(WindowType.TAB);
-
         driver.get("https://automationexercise.com/products");
 
         driver.findElement(By.id("search_product")).sendKeys("Men Tshirt");
@@ -69,7 +71,6 @@ public class App {
         System.out.println("Automation Exercise product added to cart");
 
         driver.switchTo().newWindow(WindowType.TAB);
-
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
         Thread.sleep(2000);
